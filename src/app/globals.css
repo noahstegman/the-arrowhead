@@ -1,26 +1,85 @@
 @import "tailwindcss";
 
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
-}
-
 @theme inline {
   --color-background: var(--background);
   --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+  --font-sans: var(--font-work-sans);
+  --font-serif: var(--font-noto-serif);
+
+  /* Surface hierarchy — warm editorial palette */
+  --color-surface: #FCF9F3;
+  --color-surface-low: #F3EEE6;
+  --color-surface-high: #EBE8E2;
+  --color-surface-lowest: #FFFFFF;
+
+  /* Brand palette */
+  --color-primary: #884D27;
+  --color-primary-light: #A0623C;
+  --color-secondary: #53634E;
+  --color-tertiary: #465D7E;
+  --color-on-surface: #1C1C18;
+  --color-on-surface-muted: #7A746D;
+  --color-outline-variant: #D8C2B8;
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+:root {
+  --background: #FCF9F3;
+  --foreground: #1C1C18;
+}
+
+html {
+  scroll-behavior: smooth;
 }
 
 body {
   background: var(--background);
   color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  font-family: var(--font-work-sans), system-ui, sans-serif;
+  overflow-x: hidden;
+}
+
+/* ——— Hero video cover ——— */
+.hero-video {
+  object-fit: cover;
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  inset: 0;
+}
+
+/* ——— Film grain overlay ——— */
+.grain-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 100;
+  pointer-events: none;
+  opacity: 0.035;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)'/%3E%3C/svg%3E");
+  background-repeat: repeat;
+  background-size: 200px 200px;
+}
+
+/* ——— Editorial selection ——— */
+::selection {
+  background-color: rgba(136, 77, 39, 0.12);
+  color: #1C1C18;
+}
+
+/* ——— Section label ——— */
+.section-label {
+  font-size: 0.6875rem;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  font-family: var(--font-work-sans), system-ui, sans-serif;
+  font-weight: 500;
+  color: #7A746D;
+}
+
+/* ——— Smooth horizontal scroll ——— */
+.hide-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+.hide-scrollbar {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
 }
